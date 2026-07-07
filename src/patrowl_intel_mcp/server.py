@@ -2,7 +2,7 @@
 
 stdio transport, thin HTTP over the public read-only API. Exposes three tools:
 `search_cves`, `get_cve`, and `list_trending_attacks`. Configure the backend
-with PATROWL_INTEL_API_BASE (default http://localhost:8686).
+with PATROWL_INTEL_API_BASE (default https://intel.patrowl.io).
 """
 from typing import Annotated, Optional
 

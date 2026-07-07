@@ -1,9 +1,6 @@
 # patrowl-intel-mcp
 
-An [MCP](https://modelcontextprotocol.io) server that exposes **PatrowlIntel**
-vulnerability intelligence (CVEs, EPSS, CISA KEV, public exploits, trending
-attacks) to any MCP client. It is a thin, read-only stdio wrapper over the
-public PatrowlIntel API.
+An [MCP](https://modelcontextprotocol.io) server that exposes **PatrowlIntel** vulnerability intelligence (CVEs, EPSS, CISA KEV, public exploits, trending attacks) to any MCP client. It is a thin, read-only stdio wrapper over the public PatrowlIntel API.
 
 > **v0** — three tools: `search_cves`, `get_cve`, `list_trending_attacks`.
 
@@ -19,7 +16,7 @@ public PatrowlIntel API.
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `PATROWL_INTEL_API_BASE` | `http://localhost:8686` | Backend API base URL. |
+| `PATROWL_INTEL_API_BASE` | `https://intel.patrowl.io` | Backend API base URL. |
 | `PATROWL_INTEL_WEB_BASE` | = API base | Public site base used for CVE citation links. |
 | `PATROWL_INTEL_API_KEY` | _(unset)_ | Reserved for the future authenticated tier. |
 | `PATROWL_INTEL_TIMEOUT` | `15` | Per-request timeout (seconds). |
