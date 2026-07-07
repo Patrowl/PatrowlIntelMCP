@@ -20,12 +20,19 @@ An [MCP](https://modelcontextprotocol.io) server that exposes **PatrowlIntel** v
 | `PATROWL_INTEL_WEB_BASE` | = API base | Public site base used for CVE citation links. |
 | `PATROWL_INTEL_API_KEY` | _(unset)_ | Reserved for the future authenticated tier. |
 | `PATROWL_INTEL_TIMEOUT` | `15` | Per-request timeout (seconds). |
+| `PATROWL_INTEL_MCP_TRANSPORT` | `stdio` | `stdio` (local clients) or `streamable-http` (networked service). |
+| `PATROWL_INTEL_MCP_HOST` | `127.0.0.1` | Bind host for `streamable-http`. |
+| `PATROWL_INTEL_MCP_PORT` | `8790` | Bind port for `streamable-http`. |
 
 ## Run
 
 ```bash
-# from the repo root
+# stdio (default) — for local MCP clients that launch the process
 uv run patrowl-intel-mcp          # or: pip install -e . && patrowl-intel-mcp
+
+# streamable-http — as a networked service (e.g. Docker); serves at /mcp
+PATROWL_INTEL_MCP_TRANSPORT=streamable-http PATROWL_INTEL_MCP_HOST=0.0.0.0 \
+  uv run patrowl-intel-mcp
 ```
 
 ## Client config

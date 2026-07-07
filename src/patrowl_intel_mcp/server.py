@@ -1,9 +1,14 @@
-"""PatrowlIntel MCP server (v0).
+"""PatrowlIntel MCP server.
 
-stdio transport, thin HTTP over the public read-only API. Exposes three tools:
+Thin, read-only wrapper over the public PatrowlIntel API exposing three tools:
 `search_cves`, `get_cve`, and `list_trending_attacks`. Configure the backend
 with PATROWL_INTEL_API_BASE (default https://intel.patrowl.io).
+
+Transport defaults to stdio (for local `uvx` use). Set
+PATROWL_INTEL_MCP_TRANSPORT=streamable-http (with PATROWL_INTEL_MCP_HOST /
+PATROWL_INTEL_MCP_PORT) to run it as a networked service, e.g. in Docker.
 """
+import os
 from typing import Annotated, Optional
 
 from mcp.server.fastmcp import FastMCP
@@ -11,7 +16,11 @@ from pydantic import Field
 
 from .client import PatrowlIntelClient, PatrowlIntelError
 
-mcp = FastMCP("patrowl-intel")
+mcp = FastMCP(
+    "patrowl-intel",
+    host=os.getenv("PATROWL_INTEL_MCP_HOST", "127.0.0.1"),
+    port=int(os.getenv("PATROWL_INTEL_MCP_PORT", "8790")),
+)
 client = PatrowlIntelClient()
 
 SEVERITY_LABELS = {0: "Info", 1: "Low", 2: "Medium", 3: "High", 4: "Critical"}
@@ -173,7 +182,8 @@ def list_trending_attacks(
 
 
 def main() -> None:
-    mcp.run()
+    transport = os.getenv("PATROWL_INTEL_MCP_TRANSPORT", "stdio")
+    mcp.run(transport=transport)
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@ import httpx
 
 from . import __version__
 
-DEFAULT_API_BASE = "http://localhost:8686"
+DEFAULT_API_BASE = "https://intel.patrowl.io"
 DEFAULT_TIMEOUT = 15.0
 MAX_RETRIES = 3
 
